@@ -2,7 +2,7 @@ const cp = require('child_process');
 const {writeFileSync} = require('fs');
 
 module.exports.createLocker = function() {
-  let unlocker = cp.fork('./unlocker.js');
+  let unlocker = cp.fork('./unlocker.js', undefined, { detached: true});
   process.on('exit', unlock);
 
   return {
