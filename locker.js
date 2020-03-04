@@ -1,8 +1,10 @@
 const cp = require('child_process');
 const {writeFileSync} = require('fs');
 
+const lockFilePath = './lock.txt';
+
 module.exports.createLocker = function() {
-  let unlocker = cp.fork('./unlocker.js', undefined, { detached: true});
+  let unlocker = cp.fork('./unlocker.js', [lockFilePath], { detached: true});
   process.on('exit', unlock);
 
   return {
@@ -20,7 +22,7 @@ module.exports.createLocker = function() {
   };
 
   function lock() {
-    writeFileSync('./lock.txt', process.pid, {encoding: 'utf8', flag: 'wx'});
+    writeFileSync(lockFilePath, process.pid, {encoding: 'utf8', flag: 'wx'});
     console.log('locked');
   }
 
