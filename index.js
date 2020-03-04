@@ -1,5 +1,4 @@
 const {createLocker} = require('./locker');
-// const {createLocker} = require('./locker2');
 const {bigCompute, printProgress} = require('./utils');
 
 const locker = createLocker();
