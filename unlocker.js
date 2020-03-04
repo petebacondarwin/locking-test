@@ -3,11 +3,6 @@ const fs = require('fs');
 const ppid = '' + process.ppid;
 log(`unlocker started: ${process.pid}, ${process.ppid}, ${process.connected}`);
 
-process.on('SIGINT', () => log('ctrl-C'));
-process.on('SIGHUP', () => {
-  log('terminal killed');
-  unlock();
-});
 process.on('disconnect', () => {
   log('parent exited');
   unlock();
